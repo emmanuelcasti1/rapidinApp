@@ -11,11 +11,10 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DomicilioDTO {
+public class RapidinDTO {
     private Long id;
-    private String nombreNegocio;
-    private Double precioDomicilio;
-    private LocalDate fechaDomicilio;
-    private Long domiciliarioId;
-
+    private LocalDate fecha;
+    private String nombreDomiciliario;
+    private Double totalDomiciliario;
+    private Double totalIngreso;
 }

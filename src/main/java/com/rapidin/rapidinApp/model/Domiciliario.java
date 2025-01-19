@@ -1,5 +1,8 @@
 package com.rapidin.rapidinApp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,8 +23,10 @@ public class Domiciliario {
     private Long id;
     private String nombreDomiciliario;
     private String telefono;
+    @Column(unique = true)
     private String cedula;
     private Double totalDomicilios = 0.0;
     @OneToMany(mappedBy = "domiciliario", cascade = CascadeType.ALL, orphanRemoval = true)
+   @JsonIgnoreProperties("domiciliario")
     private List<Domicilio> domicilios = new ArrayList<>();
 }
