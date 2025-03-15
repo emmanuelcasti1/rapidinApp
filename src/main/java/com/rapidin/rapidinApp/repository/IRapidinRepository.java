@@ -13,5 +13,5 @@ import java.util.Optional;
 public interface IRapidinRepository extends JpaRepository<Rapidin, Long> {
     List<Rapidin> findRapidinByFecha(LocalDate fecha);
     Rapidin findRapidinByFechaAndDomiciliario(LocalDate fecha, Domiciliario domiciliario);
-    Rapidin findRapidinByDomiciliario(Domiciliario domiciliario);
+    List<Rapidin> findRapidinByDomiciliario(Domiciliario domiciliario);
 }

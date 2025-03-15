@@ -78,12 +78,13 @@ public class DomiciliarioService implements IDomiciliarioService {
 
     @Override
     public void eliminarDomiciliario(String cedula) {
-        Domiciliario domiciliario = domiciliarioRepository.findDomiciliarioByCedula(cedula).orElseThrow(() ->
-                new RuntimeException("Domiciliario no encontrado con cédula: " + cedula));
-        Rapidin rapidin = rapidinRepository.findRapidinByDomiciliario(domiciliario);
-        rapidinRepository.delete(rapidin);
+        Domiciliario domiciliario = domiciliarioRepository.findDomiciliarioByCedula(cedula)
+                .orElseThrow(() -> new RuntimeException("Domiciliario no encontrado con cédula: " + cedula));
+        List<Rapidin> rapidines = rapidinRepository.findRapidinByDomiciliario(domiciliario);
+        rapidinRepository.deleteAll(rapidines);
         domiciliarioRepository.delete(domiciliario);
     }
+
 
     @Override
     public void resetearTotalDomiciliarios() {
