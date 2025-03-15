@@ -55,6 +55,8 @@ public class DomiciliarioService implements IDomiciliarioService {
     public void actualizarDomiciliario(String cedula, Domiciliario domiciliarioParcial) {
         Domiciliario domiciliario = domiciliarioRepository.findDomiciliarioByCedula(cedula)
                 .orElseThrow(() -> new RuntimeException("Domiciliario no encontrado con cédula: " + cedula));
+        System.out.println("Datos del domiciliario: " + domiciliario.getTotalDomicilios());
+        System.out.println("Datos del domiciliario parcial: " + domiciliarioParcial.getTotalDomicilios());
 
         if (domiciliarioParcial.getNombreDomiciliario() != null && !domiciliarioParcial.getNombreDomiciliario().isEmpty()) {
             domiciliario.setNombreDomiciliario(domiciliarioParcial.getNombreDomiciliario());
@@ -68,10 +70,9 @@ public class DomiciliarioService implements IDomiciliarioService {
             domiciliario.setTelefono(domiciliarioParcial.getTelefono());
         }
 
-        if (domiciliarioParcial.getTotalDomicilios() != null) {
+        if (domiciliarioParcial.getTotalDomicilios() != 0.0 && !domiciliarioParcial.getTotalDomicilios().isNaN()) {
             domiciliario.setTotalDomicilios(domiciliarioParcial.getTotalDomicilios());
         }
-
         domiciliarioRepository.save(domiciliario);
     }
 

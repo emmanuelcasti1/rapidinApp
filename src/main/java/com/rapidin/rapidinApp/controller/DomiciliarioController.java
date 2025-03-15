@@ -17,8 +17,13 @@ public class DomiciliarioController {
 
     @PostMapping
     public ResponseEntity<String> crearDomiciliario(@RequestBody Domiciliario domiciliario) {
-        domiciliarioService.crearDomiciliario(domiciliario);
-        return ResponseEntity.ok("Domiciliario creado correctamente");
+        if (domiciliario.getNombreDomiciliario().isEmpty() || domiciliario.getCedula().isEmpty() ||
+                domiciliario.getTelefono().isEmpty()) {
+            return ResponseEntity.badRequest().body("El domiciliario no puede ser nulo");
+        } else {
+            domiciliarioService.crearDomiciliario(domiciliario);
+            return ResponseEntity.ok("Domiciliario creado correctamente");
+        }
     }
 
     @GetMapping("/cedula/{cedulaDomiciliario}")
@@ -28,7 +33,7 @@ public class DomiciliarioController {
     }
 
     @GetMapping("/id/{idDomiciliario}")
-    public ResponseEntity<Domiciliario> buscarDomiciliarioPorCedula(@PathVariable Long idDomiciliario) {
+    public ResponseEntity<Domiciliario> buscarDomiciliarioPorId(@PathVariable Long idDomiciliario) {
         Domiciliario domiciliario = domiciliarioService.buscarDomiciliarioPorId(idDomiciliario);
         return ResponseEntity.ok(domiciliario);
     }
@@ -42,6 +47,7 @@ public class DomiciliarioController {
     @PatchMapping("/{cedulaDomiciliario}")
     public ResponseEntity<String> editarDomiciliario(@PathVariable String cedulaDomiciliario,
                                                      @RequestBody Domiciliario editado) {
+        System.out.println(editado);
         domiciliarioService.actualizarDomiciliario(cedulaDomiciliario, editado);
         return ResponseEntity.ok("Domiciliario editado correctamente");
     }

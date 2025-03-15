@@ -88,7 +88,7 @@ public class DomicilioService implements IDomicilioService {
         List<Domicilio> domiciliosFecha = new ArrayList<>();
 
         for(Domicilio domicilio : domicilios){
-            if(domicilio.getFechaDomicilio().equals(fecha)){
+            if(domicilio.getFechaDomicilio().equals(fecha) && domicilio.getDomiciliario().getTotalDomicilios() != 0.0){
                 domiciliosFecha.add(domicilio);
             }
         }

@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,14 @@ public class Domiciliario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String nombreDomiciliario;
+
+    @NotNull
     private String telefono;
+
+    @NotNull
     @Column(unique = true)
     private String cedula;
     private Double totalDomicilios = 0.0;
